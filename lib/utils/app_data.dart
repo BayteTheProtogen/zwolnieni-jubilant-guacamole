@@ -12,6 +12,13 @@ final List<Category> appCategories = [
         title: 'Co to jest silne hasło?',
         tasks: [
           Task(
+            id: 'h1_info',
+            type: TaskType.info,
+            question: 'Witaj w lekcji o hasłach! Silne hasło to jak solidny zamek w drzwiach do Twojego cyfrowego domu.',
+            options: [],
+            contentSnippet: 'Zapamiętaj: Dobre hasło powinno być długie i trudne do odgadnięcia przez obcych.',
+          ),
+          Task(
             id: 'h1_t1',
             type: TaskType.trueFalse,
             question: 'Czy "123456" to dobre i bezpieczne hasło?',
@@ -26,6 +33,19 @@ final List<Category> appCategories = [
             options: ['kocham_wnuki', 'Admin123', 'Truskawka!2024#', 'password'],
             correctAnswerIndex: 2,
             explanation: 'Silne hasło powinno mieć duże i małe litery, cyfry oraz znaki specjalne.',
+          ),
+          Task(
+            id: 'h1_t4',
+            type: TaskType.multipleResponse,
+            question: 'Wybierz WSZYSTKIE cechy silnego hasła:',
+            options: [
+              'Zawiera imię Twojego psa',
+              'Jest długie (min. 12 znaków)',
+              'Zawiera cyfry i znaki specjalne',
+              'Jest łatwe do zapamiętania dla każdego'
+            ],
+            correctAnswerIndex: [1, 2],
+            explanation: 'Dobre hasło musi być trudne do złamania, a nie łatwe do odgadnięcia.',
           ),
           Task(
             id: 'h1_t3',
@@ -69,6 +89,13 @@ final List<Category> appCategories = [
         title: 'Fałszywe SMS-y (Phishing)',
         tasks: [
           Task(
+            id: 'o1_info',
+            type: TaskType.info,
+            question: 'Oszuści często wysyłają wiadomości, które udają kogoś innego. Nazywamy to Phishingiem.',
+            options: [],
+            contentSnippet: 'Zawsze sprawdzaj, czy link w wiadomości wygląda na prawdziwy.',
+          ),
+          Task(
             id: 'o1_t1',
             type: TaskType.suspiciousElement,
             question: 'Dostałeś SMS: "Twoja paczka została wstrzymana z powodu niedopłaty 1.50 PLN. Wejdź na: http://paczka-poczta-polska.com/zaplat". Co robisz?',
@@ -87,6 +114,19 @@ final List<Category> appCategories = [
             options: ['Tak', 'Nie'],
             correctAnswerIndex: 1,
             explanation: 'Pracownik banku nigdy nie prosi o hasło ani kod PIN.',
+          ),
+          Task(
+            id: 'o1_t3',
+            type: TaskType.multipleResponse,
+            question: 'Jakie elementy w wiadomości SMS powinny wzbudzić Twój niepokój?',
+            options: [
+              'Błędy ortograficzne i dziwny język',
+              'Link do nieznanej strony',
+              'Prośba o szybką dopłatę małej kwoty',
+              'Numer telefonu nadawcy z Twojej listy kontaktów'
+            ],
+            correctAnswerIndex: [0, 1, 2],
+            explanation: 'Oszuści używają presji czasu i fałszywych linków, by Cię okraść.',
           ),
         ],
       ),

@@ -41,32 +41,39 @@ class _MascotState extends State<Mascot> with SingleTickerProviderStateMixin {
   String _getFace(double mouthValue) {
     switch (widget.state) {
       case MascotState.happy:
-        return '( ^‿^ )';
+        return '(^‿^)';
       case MascotState.sad:
-        return '( T_T )';
+        return '(T_T)';
       case MascotState.talking:
-        return mouthValue > 0.5 ? '( ◦_◦ )' : '( •_• )';
+        return mouthValue > 0.5 ? '(◦_◦)' : '(•_•)';
       case MascotState.surprised:
-        return '( O_O )';
+        return '(O_O)';
       case MascotState.thinking:
-        return '( -_- )';
+        return '(-_-)';
       case MascotState.idle:
-        return '( •_• )';
+        return '(•_•)';
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // Determine the base face text once per build to avoid flickering
+    // except for the talking state which uses mouthValue
+
     Widget mascotBody = AnimatedBuilder(
       animation: _breathingController,
       builder: (context, child) {
-        double breathing = _breathingController.value * 0.05;
-        double mouthValue = (math.sin(DateTime.now().millisecondsSinceEpoch / 100) + 1) / 2;
+        double breathing = _breathingController.value * 0.02; // Reduced breathing for smoothness
+        double mouthValue = widget.state == MascotState.talking
+            ? (math.sin(DateTime.now().millisecondsSinceEpoch / 150) + 1) / 2
+            : 0;
 
         return Transform.scale(
           scale: 1.0 + breathing,
           child: Transform.rotate(
-            angle: widget.state == MascotState.happy ? math.sin(DateTime.now().millisecondsSinceEpoch / 200) * 0.1 : 0,
+            angle: widget.state == MascotState.happy
+                ? math.sin(DateTime.now().millisecondsSinceEpoch / 400) * 0.05
+                : 0,
             child: FittedBox(
               fit: BoxFit.scaleDown,
               child: Text(
@@ -88,16 +95,16 @@ class _MascotState extends State<Mascot> with SingleTickerProviderStateMixin {
     if (widget.state == MascotState.talking) {
       mascotBody = mascotBody
           .animate(onPlay: (controller) => controller.repeat(reverse: true))
-          .moveY(begin: 0, end: -5, duration: 200.ms, curve: Curves.easeInOut);
+          .moveY(begin: 0, end: -3, duration: 600.ms, curve: Curves.easeInOut); // Smoother bob
     } else if (widget.state == MascotState.happy) {
       mascotBody = mascotBody
           .animate(onPlay: (controller) => controller.repeat(reverse: true))
-          .moveY(begin: 0, end: -15, duration: 400.ms, curve: Curves.bounceOut)
-          .scale(begin: const Offset(1, 1), end: const Offset(1.1, 1.1));
+          .moveY(begin: 0, end: -10, duration: 500.ms, curve: Curves.easeInOut)
+          .scale(begin: const Offset(1, 1), end: const Offset(1.05, 1.05), duration: 500.ms);
     } else if (widget.state == MascotState.sad) {
       mascotBody = mascotBody
           .animate(onPlay: (controller) => controller.repeat(reverse: true))
-          .shake(hz: 2, duration: 1000.ms);
+          .shake(hz: 1, duration: 2000.ms, curve: Curves.easeInOut);
     }
 
     if (widget.isHero) {

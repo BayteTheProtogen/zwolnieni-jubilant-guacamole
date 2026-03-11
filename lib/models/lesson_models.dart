@@ -1,20 +1,20 @@
-enum TaskType { multipleChoice, suspiciousElement, trueFalse }
+enum TaskType { multipleChoice, suspiciousElement, trueFalse, info, multipleResponse }
 
 class Task {
   final String id;
   final TaskType type;
   final String question;
   final List<String> options;
-  final int correctAnswerIndex;
+  final dynamic correctAnswerIndex; // Int for single choice, List<int> for multipleResponse
   final String? explanation;
-  final String? contentSnippet; // For suspicious element tasks
+  final String? contentSnippet; // For suspicious element tasks or extra text for info
 
   Task({
     required this.id,
     required this.type,
     required this.question,
     required this.options,
-    required this.correctAnswerIndex,
+    this.correctAnswerIndex,
     this.explanation,
     this.contentSnippet,
   });
