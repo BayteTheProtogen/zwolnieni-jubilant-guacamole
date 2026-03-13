@@ -9,7 +9,7 @@ Plik musi być poprawnym dokumentem JSON o następującej strukturze:
 ```json
 {
   "version": "1.0.0",
-  "next_db_url": "https://pastebin.com/raw/NOWY_KOD",
+  "next_db_url": "https://raw.githubusercontent.com/BayteTheProtogen/zwolnieni-jubilant-guacamole/refs/heads/MAIN/remote_lessons.json",
   "categories": [
     {
       "id": "kat_id",

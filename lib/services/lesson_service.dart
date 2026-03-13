@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/lesson_models.dart';
 
 class LessonService {
-  static const String _defaultUrl = 'https://pastebin.com/raw/dfn2p5Qv';
+  static const String _defaultUrl = 'https://raw.githubusercontent.com/BayteTheProtogen/zwolnieni-jubilant-guacamole/refs/heads/cyberspryt-app-11500067339206078208/remote_lessons.json';
   static const String _urlKey = 'lesson_db_url';
   static const String _cacheKey = 'cached_lessons';
 
