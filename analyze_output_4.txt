@@ -1,0 +1,11 @@
+Analyzing app...
+
+warning • Unused import: '../utils/app_data.dart' • lib/screens/home_screen.dart:4:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/lesson_success_screen.dart:38:52 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/screens/onboarding_screen.dart:110:41 • deprecated_member_use
+   info • Don't invoke 'print' in production code • lib/services/lesson_service.dart:31:7 • avoid_print
+warning • The value of the field '_player' isn't used • lib/services/sound_service.dart:4:28 • unused_field
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/lesson_media.dart:59:45 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/widgets/speech_bubble.dart:23:33 • deprecated_member_use
+
+7 issues found. (ran in 9.0s)

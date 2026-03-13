@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
-import '../utils/app_data.dart';
 import '../widgets/mascot.dart';
 import 'lesson_screen.dart';
 
@@ -33,8 +32,14 @@ class HomeScreen extends StatelessWidget {
               'Twoja ścieżka wiedzy',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 30),
-            ...appCategories.map((cat) => _buildCategorySection(context, cat, userProvider)),
+            const SizedBox(height: 10),
+            if (userProvider.isLoadingLessons)
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: LinearProgressIndicator(),
+              ),
+            const SizedBox(height: 20),
+            ...userProvider.categories.map((cat) => _buildCategorySection(context, cat, userProvider)),
             const SizedBox(height: 40),
             _buildComingSoonSection(),
           ],

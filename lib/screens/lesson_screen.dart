@@ -5,6 +5,7 @@ import '../models/lesson_models.dart';
 import '../providers/user_provider.dart';
 import '../widgets/mascot.dart';
 import '../widgets/speech_bubble.dart';
+import '../widgets/lesson_media.dart';
 import 'lesson_success_screen.dart';
 
 class LessonScreen extends StatefulWidget {
@@ -112,6 +113,10 @@ class _LessonScreenState extends State<LessonScreen> {
                     Mascot(state: _mascotState, size: 80),
                     const SizedBox(height: 20),
                     SpeechBubble(text: _currentTask.question),
+                    LessonMedia(
+                      imageUrl: _currentTask.imageUrl,
+                      videoUrl: _currentTask.videoUrl,
+                    ),
                     if (_currentTask.contentSnippet != null) ...[
                       const SizedBox(height: 20),
                       Container(

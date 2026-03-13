@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/lesson_models.dart';
+import '../services/lesson_service.dart';
+import '../utils/app_data.dart' as local_data;
 
 class UserProvider with ChangeNotifier {
+  final LessonService _lessonService = LessonService();
+  List<Category> _categories = local_data.appCategories;
+  bool _isLoadingLessons = false;
+
   int _xp = 0;
   int _streak = 0;
   DateTime? _lastActivity;
@@ -14,6 +21,8 @@ class UserProvider with ChangeNotifier {
 
   int get xp => _xp;
   int get streak => _streak;
+  List<Category> get categories => _categories;
+  bool get isLoadingLessons => _isLoadingLessons;
   List<String> get completedLessonIds => _completedLessonIds;
   double get fontSizeMultiplier => _fontSizeMultiplier;
   bool get highContrast => _highContrast;
@@ -21,6 +30,20 @@ class UserProvider with ChangeNotifier {
 
   UserProvider() {
     _loadData();
+    refreshLessons();
+  }
+
+  Future<void> refreshLessons() async {
+    _isLoadingLessons = true;
+    notifyListeners();
+
+    final remoteCategories = await _lessonService.getLessons();
+    if (remoteCategories.isNotEmpty) {
+      _categories = remoteCategories;
+    }
+
+    _isLoadingLessons = false;
+    notifyListeners();
   }
 
   Future<void> _loadData() async {
