@@ -8,6 +8,8 @@ class UserProvider with ChangeNotifier {
   final LessonService _lessonService = LessonService();
   List<Category> _categories = local_data.appCategories;
   bool _isLoadingLessons = false;
+  bool _isInitialFetchDone = false;
+  bool _showUpdatePopup = false;
 
   int _xp = 0;
   int _streak = 0;
@@ -23,6 +25,8 @@ class UserProvider with ChangeNotifier {
   int get streak => _streak;
   List<Category> get categories => _categories;
   bool get isLoadingLessons => _isLoadingLessons;
+  bool get isInitialFetchDone => _isInitialFetchDone;
+  bool get showUpdatePopup => _showUpdatePopup;
   List<String> get completedLessonIds => _completedLessonIds;
   double get fontSizeMultiplier => _fontSizeMultiplier;
   bool get highContrast => _highContrast;
@@ -39,10 +43,19 @@ class UserProvider with ChangeNotifier {
 
     final remoteCategories = await _lessonService.getLessons();
     if (remoteCategories.isNotEmpty) {
+      // Basic check if content is different
+      if (_isInitialFetchDone && _categories.length != remoteCategories.length) {
+        _showUpdatePopup = true;
+        Future.delayed(const Duration(seconds: 4), () {
+          _showUpdatePopup = false;
+          notifyListeners();
+        });
+      }
       _categories = remoteCategories;
     }
 
     _isLoadingLessons = false;
+    _isInitialFetchDone = true;
     notifyListeners();
   }
 

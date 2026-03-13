@@ -10,6 +10,9 @@ void main() {
   });
 
   testWidgets('App smoke test', (WidgetTester tester) async {
+    // Disable animations for the test to avoid pending timers
+    // However, Mascot uses its own controllers.
+
     await tester.pumpWidget(
       ChangeNotifierProvider(
         create: (_) => UserProvider(),
@@ -19,7 +22,8 @@ void main() {
 
     expect(find.byType(CyberSprytApp), findsOneWidget);
 
-    // Allow animations to run a bit
+    // Just a few frames
+    await tester.pump(const Duration(milliseconds: 100));
     await tester.pump(const Duration(milliseconds: 100));
   });
 }

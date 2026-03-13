@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'providers/user_provider.dart';
 import 'screens/onboarding_screen.dart';
 import 'screens/home_screen.dart';
+import 'screens/loading_screen.dart';
 
 void main() {
   runApp(
@@ -25,8 +26,18 @@ class CyberSprytApp extends StatelessWidget {
       title: 'CyberSpryt',
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(context, userProvider),
-      home: userProvider.isFirstRun ? const OnboardingScreen() : const HomeScreen(),
+      home: _getHome(userProvider),
     );
+  }
+
+  Widget _getHome(UserProvider userProvider) {
+    if (!userProvider.isInitialFetchDone) {
+      return const LoadingScreen();
+    }
+    if (userProvider.isFirstRun) {
+      return const OnboardingScreen();
+    }
+    return const HomeScreen();
   }
 
   ThemeData _buildTheme(BuildContext context, UserProvider provider) {

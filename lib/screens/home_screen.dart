@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/user_provider.dart';
 import '../widgets/mascot.dart';
+import '../widgets/update_popup.dart';
 import 'lesson_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,6 +12,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
 
+    return Scaffold(
+      body: Stack(
+        children: [
+          _buildMainContent(context, userProvider),
+          if (userProvider.showUpdatePopup) const UpdatePopup(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildMainContent(BuildContext context, UserProvider userProvider) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('CyberSpryt', style: TextStyle(fontWeight: FontWeight.bold)),

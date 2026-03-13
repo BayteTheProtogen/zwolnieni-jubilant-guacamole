@@ -1,12 +1,12 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.0",
   "next_db_url": "https://raw.githubusercontent.com/BayteTheProtogen/zwolnieni-jubilant-guacamole/refs/heads/cyberspryt-app-11500067339206078208/remote_lessons.json",
   "categories": [
     {
       "id": "hasla",
       "title": "Bezpieczne Hasła",
       "description": "Naucz się tworzyć hasła, których nikt nie złamie.",
-      "icon": "💅",
+      "icon": "🔑",
       "lessons": [
         {
           "id": "h1",
@@ -99,7 +99,7 @@
       "id": "oszusci",
       "title": "Uwaga na Oszustów",
       "description": "Rozpoznaj próby wyłudzenia pieniędzy i danych.",
-      "icon": "💅",
+      "icon": "🛡️",
       "lessons": [
         {
           "id": "o1",
